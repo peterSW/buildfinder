@@ -10,7 +10,8 @@ import java.util.Collections;
 
 
 @Extension
-public class ProjectActionFactory extends TransientActionFactory<AbstractProject> {
+public final class ProjectActionFactory
+    extends TransientActionFactory<AbstractProject> {
 
     @Override
     public Class<AbstractProject> type() {
@@ -18,7 +19,7 @@ public class ProjectActionFactory extends TransientActionFactory<AbstractProject
     }
 
     @Override
-    public Collection<? extends Action> createFor(AbstractProject t) {
+    public Collection<? extends Action> createFor(final AbstractProject t) {
         return Collections.singleton(new ProjectAction());
     }
 
