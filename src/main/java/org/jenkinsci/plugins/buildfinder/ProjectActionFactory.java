@@ -20,7 +20,7 @@ public final class ProjectActionFactory
 
     @Override
     public Collection<? extends Action> createFor(final AbstractProject t) {
-        return Collections.singleton(new ProjectAction());
+        return Collections.singleton(new ProjectAction(t));
     }
 
 }

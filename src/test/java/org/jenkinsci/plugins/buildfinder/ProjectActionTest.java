@@ -1,15 +1,19 @@
 package org.jenkinsci.plugins.buildfinder;
 
+import hudson.model.AbstractProject;
 import org.junit.Test;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.mock;
 
 public class ProjectActionTest {
     
+    AbstractProject project;
     ProjectAction action;
     
     public ProjectActionTest() {
-         action = new ProjectAction();
+        project = mock(AbstractProject.class);
+        action = new ProjectAction(project);
     }
     
     @Test
@@ -25,6 +29,11 @@ public class ProjectActionTest {
     @Test
     public void testGetIconFileName() {
         assertThat(action.getIconFileName(), is("search.png"));
+    }
+    
+    @Test
+    public void testGetProjectGivesActionsProject() {
+        assertThat(action.getProject(), is(project));
     }
     
 }

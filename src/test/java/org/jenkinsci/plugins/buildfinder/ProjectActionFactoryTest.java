@@ -3,6 +3,7 @@ package org.jenkinsci.plugins.buildfinder;
 import hudson.model.AbstractProject;
 import hudson.model.Action;
 import java.util.Collection;
+import static org.hamcrest.CoreMatchers.is;
 import static org.mockito.Mockito.mock;
 
 import org.junit.Test;
@@ -19,9 +20,15 @@ public final class ProjectActionFactoryTest {
 
     @Test
     public void testCreateForGivesOneAction() {
-        Collection<? extends Action> result = factory.createFor(mockProject);
+        Collection result = factory.createFor(mockProject);
 
         assertEquals(1, result.size());
     }
 
+    @Test
+    public void testCreatedActionHasProjectItWasCreatedFor() {
+        Collection<? extends Action> result = factory.createFor(mockProject);
+        ProjectAction theOnlyProjectAction = (ProjectAction)(result.iterator().next());
+        assertThat(theOnlyProjectAction.getProject(), is(mockProject));
+    }
 }
